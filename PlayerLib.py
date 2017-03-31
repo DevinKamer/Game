@@ -13,11 +13,11 @@ class Player(Character):
     def __init__(self, x=50, y=575, weapon="Brussle"):
         """Weapon is Celery, Broccili or Brussle, Default Is Brussle"""
         if weapon == "Celery":
-            super().__init__(x, y, 4, 2, 1)
+            Character.__init__(self, x, y, 4, 2, 1)
         elif weapon == "Broccli":
-            super().__init__(x, y, 4, 3, .75)
+            Character.__init__(self, x, y, 4, 3, .75)
         else:
-            super().__init__(x, y, 4, 1, 1.25)
+            Character.__init__(self, x, y, 4, 1, 1.25)
         self.weapon = weapon
         
     def __str__(self):

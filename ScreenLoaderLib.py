@@ -5,10 +5,12 @@
 """The Classes that contain which objects belong on which screen"""
 
 import pygame
+import os
 
 class ScreenLoader(object):
 
     def __init__(self):
+        self.workingDir = os.getcwd()
         self.curScreen = 1
         self.bossSwitch = False
         self.play = False #For Keeping Track of Music
@@ -56,17 +58,17 @@ class ScreenLoader(object):
         self.curScreen = screen
         
         if screen == 2 and not self.play:
-            pygame.mixer.music.load("music/Background Music.ogg")
-            pygame.mixer.music.play(loops=-1)
+            pygame.mixer.music.load(self.workingDir + "/music/Background Music.ogg")
+            pygame.mixer.music.play()
             self.play = True
         elif screen == "lose" and not self.bossSwitch:
-            pygame.mixer.music.load("music/Boss_Music.ogg")
-            pygame.mixer.music.play(loops=-1)
+            pygame.mixer.music.load(self.workingDir + "/music/Boss_Music.ogg")
+            pygame.mixer.music.play()
             self.bossSwitch = True
 
         elif screen == "bonus" and not self.bonusPlay:
-            pygame.mixer.music.load("music/Music.ogg")
-            pygame.mixer.music.play(loops=-1)
+            pygame.mixer.music.load(self.workingDir + "/music/Music.ogg")
+            pygame.mixer.music.play()
             self.bonusPlay = True
             
     def Get_Cur_Plat(self):

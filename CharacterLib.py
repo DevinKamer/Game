@@ -5,13 +5,14 @@
 """The Bases for the Player and Enemy Classes"""
 
 import pygame
+import os
 
 class Character(pygame.sprite.Sprite):
     """Base class for Player and Enemy"""
     def __init__(self, x=200, y=200, hp=1, baseSpeed=1, baseAttack=1):
-        super().__init__()
+        pygame.sprite.Sprite.__init__(self)
         
-        image = pygame.image.load("Images/FatGuy.png").convert()
+        image = pygame.image.load(os.getcwd() + "/Images/FatGuy.png").convert()
         image.set_colorkey((255, 255, 255))
         self.image = image
         self.rect = self.image.get_rect()

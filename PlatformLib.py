@@ -10,7 +10,7 @@ class Platform(pygame.sprite.Sprite):
     """Creates a Platform with xy coords size and color"""
     def __init__(self, x, y, width, height, color):
         """x y are coords, width(250 max) height are size and color is color... duh"""
-        super().__init__()
+        pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface([width, height])
         self.image.fill(color)
         self.rect = self.image.get_rect()

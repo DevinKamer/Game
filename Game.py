@@ -4,12 +4,13 @@
 
 """The Main Runtime for the Game"""
 
-from tkinter import *
+from Tkinter import *
 from EnemyLib import Enemy
 from PlayerLib import Player
 from PlatformLib import Platform
 from ScreenLoaderLib import ScreenLoader
 import pygame
+import os
 
 class Application(Frame):
     """A Tets Main Menu GUI"""
@@ -50,13 +51,20 @@ class Application(Frame):
 
 
 # main
+"""
+Removed for compatibility with python2
+
 root = Tk()
 root.title("Main Menu")
 app = Application(root)
 root.mainloop()
 root.iconify()
 tryAgain = True
+"""
+workingDir = os.getcwd()
 
+inputs = "Keyboard"
+choice = "Celery"
 
 if inputs == "Keyboard":
     inputs = False   #Changing from str to bool is easier to manage
@@ -108,11 +116,11 @@ enemy1_1 = Enemy(1000, 275, 5, 1, 3, "Guy1")
 enemy2_1 = Enemy(1000, 575, 5, 2, 3, "Guy2")
 enemy3_1 = Enemy(1250, 575, 5, 2, 3, "Guy3")
 
-background = pygame.transform.scale(pygame.image.load("images/trees0.png"),
+background = pygame.transform.scale(pygame.image.load(workingDir + "/Images/trees0.png"),
                                      (size[0], size[1]))
-background2 = pygame.transform.scale(pygame.image.load("images/Lose.png"),
+background2 = pygame.transform.scale(pygame.image.load(workingDir + "/Images/Lose.png"),
                                      (size[0], size[1]))
-background3 = pygame.transform.scale(pygame.image.load("images/BonusRoom.png"),
+background3 = pygame.transform.scale(pygame.image.load(workingDir + "/Images/BonusRoom.png"),
                                      (size[0], size[1]))
 
 for i in range(0, 8):
@@ -162,15 +170,15 @@ points = 0
 isRunningLeft = False
 isRunningRight = False
 
-nomSound = pygame.mixer.Sound("music/nom.ogg")
-hitSound = pygame.mixer.Sound("music/hit.ogg")
-fallSound = pygame.mixer.Sound("music/Fall.ogg")
+nomSound = pygame.mixer.Sound(workingDir + "/music/nom.ogg")
+hitSound = pygame.mixer.Sound(workingDir + "/music/hit.ogg")
+fallSound = pygame.mixer.Sound(workingDir + "/music/Fall.ogg")
 
-img1 = pygame.image.load("images/walk1.png").convert()
+img1 = pygame.image.load(workingDir + "/Images/walk1.png").convert()
 img = img1
 direction = "Right"
-pygame.mixer.music.load("music/Doughnut_Guy_Music.ogg")
-pygame.mixer.music.play(loops=-1)
+pygame.mixer.music.load(workingDir + "/music/Doughnut_Guy_Music.ogg")
+pygame.mixer.music.play()
 img.set_colorkey(BLACK)
 
 
@@ -320,8 +328,8 @@ while not done:
         ySpeed = 0
         if ScreenChanger.curScreen == "bonus":
             ScreenChanger.Update_Screen(1)
-            pygame.mixer.music.load("music/Background Music.ogg")
-            pygame.mixer.music.play(loops=-1)
+            pygame.mixer.music.load(workingDir + "/music/Background Music.ogg")
+            pygame.mixer.music.play()
         else:
             testChar.hp -= 1
             fallSound.play()
@@ -369,7 +377,7 @@ while not done:
             hitSound.play()
             gravity = 0
             ySpeed = 0
-            curY -= 20
+            curY -= 40
             points += 100
             
         
@@ -418,7 +426,7 @@ while not done:
     pygame.display.flip()
  
     # --- Limit to 60 frames per second
-    clock.tick(60)
+    clock.tick(120)
  
 # Close the window and quit.
 pygame.quit()
